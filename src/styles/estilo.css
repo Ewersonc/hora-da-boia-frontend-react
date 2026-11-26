@@ -1,0 +1,163 @@
+:root {
+  --fundo: #f6f4ef;
+  --superficie: #ffffff;
+  --texto: #1f2430;
+  --texto-suave: #5d6475;
+  --borda: #d9d5c9;
+  --destaque: #1f5f8b;
+  --destaque-fundo: #e3eef6;
+  --perigo: #b3261e;
+  --perigo-fundo: #fbe9e7;
+  --sucesso: #1d6b3a;
+  --sucesso-fundo: #e5f4ea;
+  --raio: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fundo: #151821;
+    --superficie: #1e2230;
+    --texto: #eceef4;
+    --texto-suave: #a3a9ba;
+    --borda: #343a4d;
+    --destaque: #7db8e3;
+    --destaque-fundo: #243447;
+    --perigo: #f2a29b;
+    --perigo-fundo: #3a2220;
+    --sucesso: #86d6a3;
+    --sucesso-fundo: #1f3427;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  line-height: 1.45;
+}
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 12px 20px;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+}
+.topo .marca { font-weight: 700; color: var(--texto); text-decoration: none; }
+.topo nav { display: flex; flex-wrap: wrap; gap: 4px 16px; flex: 1; }
+.topo nav a { color: var(--texto-suave); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+.topo nav a[aria-current="page"], .topo nav a:hover { color: var(--destaque); border-bottom-color: var(--destaque); }
+.topo .usuario { color: var(--texto-suave); font-size: 0.9rem; }
+
+main { max-width: 760px; margin: 0 auto; padding: 24px 16px 48px; }
+main.largo { max-width: 960px; }
+h1 { font-size: 1.5rem; margin: 0 0 16px; }
+h2 { font-size: 1.1rem; margin: 24px 0 8px; }
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.campo { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+.campo label { font-size: 0.9rem; color: var(--texto-suave); }
+.linha { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+.linha .campo { margin-bottom: 0; }
+
+input, select {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  color: var(--texto);
+  min-width: 0;
+}
+input[type="checkbox"] { width: 18px; height: 18px; padding: 0; }
+input:focus-visible, select:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+.botao {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  color: var(--texto);
+  cursor: pointer;
+}
+.botao:hover:not(:disabled) { border-color: var(--destaque); }
+.botao:disabled { opacity: 0.5; cursor: not-allowed; }
+.botao.principal { background: var(--destaque); border-color: var(--destaque); color: #fff; font-weight: 600; }
+@media (prefers-color-scheme: dark) { .botao.principal { color: #10151d; } }
+.botao.perigo { color: var(--perigo); border-color: var(--perigo); }
+.botao.discreto { border-color: transparent; background: transparent; color: var(--texto-suave); }
+.botao.pequeno { padding: 4px 10px; font-size: 0.9rem; }
+
+.alerta { padding: 10px 14px; border-radius: var(--raio); margin: 12px 0; }
+.alerta.erro { background: var(--perigo-fundo); color: var(--perigo); }
+.alerta.sucesso { background: var(--sucesso-fundo); color: var(--sucesso); }
+.alerta.info { background: var(--destaque-fundo); color: var(--destaque); }
+
+.fichas { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
+.ficha {
+  font: inherit;
+  min-width: 72px;
+  padding: 8px 10px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  color: var(--texto);
+  cursor: pointer;
+}
+.ficha[aria-pressed="true"] { background: var(--destaque-fundo); border-color: var(--destaque); color: var(--destaque); font-weight: 600; }
+
+.abas { display: flex; gap: 8px; margin-bottom: 16px; }
+.abas button[aria-selected="true"] { background: var(--destaque-fundo); border-color: var(--destaque); color: var(--destaque); font-weight: 600; }
+
+.tabela-rolagem { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--superficie); border: 1px solid var(--borda); border-radius: var(--raio); }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--borda); white-space: nowrap; }
+th { font-size: 0.85rem; color: var(--texto-suave); }
+tbody tr[aria-selected="true"] { background: var(--destaque-fundo); }
+tbody tr.clicavel { cursor: pointer; }
+
+.selo { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.8rem; background: var(--destaque-fundo); color: var(--destaque); }
+.selo.compareceu { background: var(--sucesso-fundo); color: var(--sucesso); }
+.selo.nao_compareceu, .selo.cancelada { background: var(--perigo-fundo); color: var(--perigo); }
+
+.reserva { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+.reserva h3 { margin: 0 0 4px; font-size: 1rem; }
+.reserva p { margin: 0; color: var(--texto-suave); font-size: 0.9rem; }
+.acoes { display: flex; gap: 8px; align-items: center; }
+
+.vazio { color: var(--texto-suave); text-align: center; padding: 24px 0; }
+
+dialog { border: 1px solid var(--borda); border-radius: var(--raio); background: var(--superficie); color: var(--texto); padding: 20px; width: min(440px, calc(100% - 32px)); }
+dialog::backdrop { background: rgba(0, 0, 0, 0.45); }
+dialog h2 { margin-top: 0; }
+dialog .acoes { justify-content: flex-end; margin-top: 16px; }
+
+.codigo { font-family: ui-monospace, monospace; font-size: 1.4rem; letter-spacing: 0.1em; font-weight: 700; }
+.muted { color: var(--texto-suave); font-size: 0.9rem; }
+
+@media (max-width: 520px) {
+  .linha { flex-direction: column; align-items: stretch; }
+  main { padding-top: 16px; }
+}
+
+a.botao { display: inline-block; text-decoration: none; }
+.linha.entre { justify-content: space-between; margin-bottom: 16px; }
+.linha.entre h1 { margin: 0; }
+.campo-curto { width: 90px; }
+.sem-margem-topo { margin-top: 0; }
